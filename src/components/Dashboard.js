@@ -14,6 +14,7 @@ import raffleImage from "../assets/raffleImage.png"
 import Navbar from "./Navbar"
 import "../App.css"
 import TicketModal from "./TicketModal"
+import CoinModal from "./CoinModal"
 
 export default function Dashboard() {
 
@@ -29,10 +30,20 @@ export default function Dashboard() {
         setOpenTicket(true);
     };
 
+    const [openCoin, setOpenCoin] = useState(false);
+ 
+    const handleCloseCoin = () => {
+        setOpenCoin(false);
+    };
+ 
+    const handleOpenCoin = () => {
+        setOpenCoin(true);
+    };
+
     return (
         <div className="">
 
-        <Navbar handleOpen={handleOpenTicket}/>
+        <Navbar handleOpenTicket={handleOpenTicket} handleOpenCoin={handleOpenCoin}/>
 
         <div className="w-10/12 mx-auto flex">
             <div className="w-4/6">
@@ -176,6 +187,7 @@ export default function Dashboard() {
         </div>
 
         <TicketModal open={openTicket} handleClose={handleCloseTicket}/>
+        <CoinModal open={openCoin} handleClose={handleCloseCoin}/>
 
         </div>
     )
