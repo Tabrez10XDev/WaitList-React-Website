@@ -17,6 +17,7 @@ import TicketModal from "./TicketModal"
 import CoinModal from "./CoinModal"
 import TaskModal from "./TaskModal"
 import ChestModal from "./ChestModal"
+import ReferralModal from "./ReferralModal"
 
 export default function Dashboard() {
 
@@ -60,6 +61,16 @@ export default function Dashboard() {
  
     const handleOpenChest = () => {
         setOpenChest(true);
+    };
+
+    const [openReferral, setOpenReferral] = useState(false);
+ 
+    const handleCloseReferral = () => {
+        setOpenReferral(false);
+    };
+ 
+    const handleOpenReferral = () => {
+        setOpenReferral(true);
     };
 
     return (
@@ -170,7 +181,7 @@ export default function Dashboard() {
                             for every successful<br />referral.
                         </p>
 
-                        <div className="px-2.5 py-1.5 rounded-xl bg-black flex  items-center justify-center">
+                        <div onClick={handleOpenReferral} className="px-2.5 py-1.5 rounded-xl bg-black flex  items-center justify-center cursor-pointer">
                             <p className="font-SatoshiMedium text-base text-white">Refer now</p>
                         </div>
                     </div>
@@ -212,6 +223,7 @@ export default function Dashboard() {
         <CoinModal open={openCoin} handleClose={handleCloseCoin}/>
         <TaskModal open={openTask} handleClose={handleCloseTask}/>
         <ChestModal open={openChest} handleClose={handleCloseChest}/>
+        <ReferralModal open={openReferral} handleClose={handleCloseReferral}/>
 
         </div>
     )
