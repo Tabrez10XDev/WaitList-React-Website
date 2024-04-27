@@ -96,5 +96,29 @@
   100% { opacity: 1; }
 }
 
+.task-holder:hover .task-to-top {
+  transform: translate(-56px, -30px ); /* Adjust the value as needed */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.task-to-top {
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.task-holder:hover .task-to-bottom {
+  transform: translate(-56px, 30px ); /* Adjust the value as needed */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.task-to-bottom {
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.purple-gradient {
+
+  background: linear-gradient(45deg, #816CFF, #6053B1); /* Adjust colors as needed */
+}
+
+
 
 

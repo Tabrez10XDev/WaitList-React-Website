@@ -14,7 +14,9 @@ module.exports = {
         "blue": "#9747FF",
         "textBlue": "#2071EE",
         "green": "#58BB47",
-        "textGreyLight": "#979DAA"
+        "textGreyLight": "#979DAA",
+        "borderGrey": "#CFD2D8",
+        "bgBlue": "#4A87F2"
       },
       fontFamily: {
         'Satoshi': 'Satoshi',
