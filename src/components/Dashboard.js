@@ -4,7 +4,7 @@ import chest3 from "../assets/chest3.png"
 import chest4 from "../assets/chest4.png"
 import ChestCard from "./ChestCard"
 import { useState } from "react"
-import Task from "./Task"
+import { TaskVolt, TaskX } from "./Task"
 import yellowDiamond from "../assets/yellow_diamond.svg"
 import bgRay from "../assets/bgRay.png"
 import chestAnim from "../assets/chestAnim.gif"
@@ -15,6 +15,8 @@ import Navbar from "./Navbar"
 import "../App.css"
 import TicketModal from "./TicketModal"
 import CoinModal from "./CoinModal"
+import TaskModal from "./TaskModal"
+import ChestModal from "./ChestModal"
 
 export default function Dashboard() {
 
@@ -40,6 +42,26 @@ export default function Dashboard() {
         setOpenCoin(true);
     };
 
+    const [openTask, setOpenTask] = useState(false);
+ 
+    const handleCloseTask = () => {
+        setOpenTask(false);
+    };
+ 
+    const handleOpenTask = () => {
+        setOpenTask(true);
+    };
+
+    const [openChest, setOpenChest] = useState(false);
+ 
+    const handleCloseChest = () => {
+        setOpenChest(false);
+    };
+ 
+    const handleOpenChest = () => {
+        setOpenChest(true);
+    };
+
     return (
         <div className="">
 
@@ -50,18 +72,18 @@ export default function Dashboard() {
                 <p className="font-SatoshiBold text-2xl text-left">
                     Get Defy Insiders <span className="bg-gradient-to-r from-purple to-blue text-transparent bg-clip-text">NFT</span>
                 </p>
-                <p className="font-SatoshiMedium text-base text-grey text-left">
+                <p className="font-SatoshiMedium text-base text-grey text-left mt-3">
                     Earn coins to buy chest and get Defy Insiders NFT collection and early access to app.
                 </p>
-                <div className="flex">
-                    <ChestCard startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
-                    <ChestCard startColour={'01D1F7'} endColour={'077BB3'} image={chest2} />
-                    <ChestCard startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
-                    <ChestCard startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} />
+                <div className="flex mt-8">
+                    <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
+                    <ChestCard onclick={handleOpenChest} startColour={'01D1F7'} endColour={'077BB3'} image={chest2} />
+                    <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+                    <ChestCard onclick={handleOpenChest} startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} />
 
                 </div>
 
-                <p className="font-SatoshiBold text-2xl text-left">
+                <p className="font-SatoshiBold text-2xl text-left my-8">
                     Recommended Task
                 </p>
 
@@ -100,14 +122,14 @@ export default function Dashboard() {
 
                 </div>
                 <div className="h-[1px] w-full bg-textGreyLight" />
-                <Task />
+                <TaskX onclick={handleOpenTask} />
 
 
 
             </div>
 
             <div className="w-2/6 flex flex-col items-end justify-center">
-                <div className="size-80 rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
+                <div className="w-80 h-auto rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
                     style={{
                         backgroundImage: `url(${bgRay})`,
                         backgroundPosition: 'center',
@@ -132,7 +154,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="w-80 bg-bgBlue rounded-2xl p-4">
+                <div className="w-80 bg-bgBlue rounded-2xl p-4 my-5">
                     <div className="flex items-align justify-between">
                         <div className="flex items-align">
                             <p className="font-SatoshiBold text-lg text-white text-left">
@@ -188,6 +210,8 @@ export default function Dashboard() {
 
         <TicketModal open={openTicket} handleClose={handleCloseTicket}/>
         <CoinModal open={openCoin} handleClose={handleCloseCoin}/>
+        <TaskModal open={openTask} handleClose={handleCloseTask}/>
+        <ChestModal open={openChest} handleClose={handleCloseChest}/>
 
         </div>
     )

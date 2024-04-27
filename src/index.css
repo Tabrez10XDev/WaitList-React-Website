@@ -34,7 +34,7 @@ li{
 }
 
 .custom-shadow {
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); /* x-offset, y-offset, blur radius, color */
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.12); /* x-offset, y-offset, blur radius, color */
 }
 
 
