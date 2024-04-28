@@ -16,9 +16,10 @@ export default function CoinModal({open, handleClose}){
             width: 350,
             margin: "auto",
             color: "white",
+            className:"NFTModal"
         }}
     >
-        <div className="w-full h-full bg-white p-5 rounded-lg ">
+        <div className="w-full h-full bg-white p-5 rounded-lg NFTModal">
             <p className="text-xl font-SatoshiBold mx-auto text-black text-center">Coins</p>
             <img className="w-1/3 object-contain my-2 mx-auto" src={coinAnim}/>
 

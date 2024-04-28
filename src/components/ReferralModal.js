@@ -20,9 +20,10 @@ export default function ReferralModal({open, handleClose}){
             width: 800,
             margin: "auto",
             color: "white",
+            className:"NFTModal"
         }}
     >
-        <div className="w-full h-full bg-white p-5 rounded-lg ">
+        <div className="w-full h-full bg-white p-5 rounded-lg NFTModal ">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                         <img className="h-8 w-8 object-contain" src={referralIcon}/>

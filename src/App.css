@@ -80,6 +80,10 @@
   border-top-left-radius: 6px;
 }
 
+.NFTModal:focus {
+  outline: none !important;
+}
+
 .unselected-div{
   padding-left: 12px;
   display: flex;

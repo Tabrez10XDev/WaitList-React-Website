@@ -18,6 +18,8 @@ import CoinModal from "./CoinModal"
 import TaskModal from "./TaskModal"
 import ChestModal from "./ChestModal"
 import ReferralModal from "./ReferralModal"
+import ChooseNFTModal from "./ChooseNFTModal"
+import NFTBetModal from "./NFTBetModal"
 
 export default function Dashboard() {
 
@@ -73,12 +75,32 @@ export default function Dashboard() {
         setOpenReferral(true);
     };
 
+    const [openChooseNFT, setOpenChooseNFT] = useState(false);
+ 
+    const handleCloseChooseNFT = () => {
+        setOpenChooseNFT(false);
+    };
+ 
+    const handleOpenChooseNFT = () => {
+        setOpenChooseNFT(true);
+    };
+
+    const [openNFT, setOpenNFT] = useState(false);
+ 
+    const handleCloseNFT = () => {
+        setOpenNFT(false);
+    };
+ 
+    const handleOpenNFT = () => {
+        setOpenNFT(true);
+    };
+
     return (
         <div className="">
 
         <Navbar handleOpenTicket={handleOpenTicket} handleOpenCoin={handleOpenCoin}/>
 
-        <div className="w-10/12 mx-auto flex">
+        <div className="w-11/12 mx-auto flex">
             <div className="w-4/6">
                 <p className="font-SatoshiBold text-2xl text-left">
                     Get Defy Insiders <span className="bg-gradient-to-r from-purple to-blue text-transparent bg-clip-text">NFT</span>
@@ -139,8 +161,8 @@ export default function Dashboard() {
 
             </div>
 
-            <div className="w-2/6 flex flex-col items-end justify-center">
-                <div className="w-80 h-auto rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
+            <div className="w-2/6 flex flex-col items-end justify-center px-8">
+                <div className="w-full h-auto rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
                     style={{
                         backgroundImage: `url(${bgRay})`,
                         backgroundPosition: 'center',
@@ -165,7 +187,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="w-80 bg-bgBlue rounded-2xl p-4 my-5">
+                <div className="w-full bg-bgBlue rounded-2xl p-4 my-5">
                     <div className="flex items-align justify-between">
                         <div className="flex items-align">
                             <p className="font-SatoshiBold text-lg text-white text-left">
@@ -188,7 +210,7 @@ export default function Dashboard() {
                 </div>
 
 
-                <div className="w-80  rounded-2xl px-5 py-6 purple-gradient">
+                <div className="w-full  rounded-2xl px-5 py-6 purple-gradient">
                         <div className="flex items-align">
                         <img className="ml-2" src={star} />
 
@@ -197,11 +219,11 @@ export default function Dashboard() {
                             </p>
                         </div>
 
-                    <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center justify-between ">
                         <p className="font-Satoshi text-sm text-white text-left">
                         Raffle your favorite NFT and<br/>make great potential.
                         </p>
-                        <img className="object-contain flex-1 w-1/3 ml-2"  src={raffleImage} />
+                        <img className="object-contain w-1/3 ml-2"  src={raffleImage} />
 
                         
                     </div>
@@ -209,7 +231,7 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between mt-2">
                         <div></div>
 
-                        <div className="px-6  py-2.5 rounded-lg bg-white flex  items-center justify-center">
+                        <div onClick={handleOpenChooseNFT} className="px-6  py-2.5 rounded-lg bg-white flex  items-center justify-center cursor-pointer">
                             <p className="font-SatoshiMedium text-base text-black">Participate Now</p>
                         </div>
                     </div>
@@ -224,6 +246,8 @@ export default function Dashboard() {
         <TaskModal open={openTask} handleClose={handleCloseTask}/>
         <ChestModal open={openChest} handleClose={handleCloseChest}/>
         <ReferralModal open={openReferral} handleClose={handleCloseReferral}/>
+        <ChooseNFTModal open={openChooseNFT} handleClose={handleCloseChooseNFT} handleOpenNFT={handleOpenNFT}/>
+        <NFTBetModal open={openNFT} handleClose={handleCloseNFT}/>
 
         </div>
     )
