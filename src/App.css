@@ -84,6 +84,37 @@
   outline: none !important;
 }
 
+.RaffleWinnersSelectedDiv{
+  border-radius: 30px;
+  background-color: white;
+  cursor: pointer;
+  height: 100%;
+  width: 50%;
+}
+
+.RaffleWinnersSelected{
+  color: black;
+  margin: auto;
+  font-family: 'SatoshiMedium';
+  font-size: 14px;
+}
+
+.RaffleWinnersUnselectedDiv{
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  height: 100%;
+  width: 50%;
+}
+
+.RaffleWinnersUnselected{
+  color: #979DAA;
+  margin: auto;
+  font-family: 'SatoshiMedium';
+  font-size: 14px;
+}
+
+
 .unselected-div{
   padding-left: 12px;
   display: flex;
