@@ -73,6 +73,16 @@
   border-bottom: 5px solid black;
 }
 
+.arrow-up-marquee {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
+  
+  border-bottom: 5px solid #2071EE;
+}
+
 .arrow-down {
   width: 0; 
   height: 0; 
@@ -80,6 +90,15 @@
   border-right: 5px solid transparent;
   
   border-top: 5px solid black;
+}
+
+.arrow-down-marquee {
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  
+  border-top: 8px solid #2071EE;
 }
 
 .selected-div{
