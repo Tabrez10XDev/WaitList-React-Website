@@ -60,18 +60,18 @@ export default function TopupModal({ open, handleClose }) {
                             <p className="text-right text-green text-sm font-SatoshiBold">70%</p>
                         </div>
 
-                        <div 
-                         style={{
-                            background:'linear-gradient(90deg, #FF440A, #FF9900, #FFD600, #84EC00, #39CE05)'
-                        }}
-                        className="relative rounded-md  h-5 w-full mt-4">
-                            <div
+                        <div
                             style={{
-                                width:'30%',
-                                right:0
+                                background: 'linear-gradient(90deg, #FF440A, #FF9900, #FFD600, #84EC00, #39CE05)'
                             }}
-                            className="absolute top-0 h-5 bg-greyVeryLight rounded-br-md rounded-tr-md">
-                                
+                            className="relative rounded-md  h-5 w-full mt-4">
+                            <div
+                                style={{
+                                    width: '30%',
+                                    right: 0
+                                }}
+                                className="absolute top-0 h-5 bg-greyVeryLight rounded-br-md rounded-tr-md">
+
                             </div>
                         </div>
 
@@ -106,12 +106,12 @@ export default function TopupModal({ open, handleClose }) {
                             className="mt-2 text-black px-2 py-2 rounded-md focus:outline-none stroke-borderGrey border-2 min-h-8  w-full"
                         />
 
-                    
+
 
                         <div className="flex items-center mt-4 justify-between">
                             <p className="ml-2 font-SatoshiMedium text-textGreyDark text-sm">You'll have</p>
                             <div className="flex items-center px-2.5 py-1.5 bg-greyVeryLight rounded-full">
-                            <img className="size-6 object-contain mr-2" src={blueTicket} />
+                                <img className="size-6 object-contain mr-2" src={blueTicket} />
                                 <p className="text-textGreyDark font-SatoshiMedium text-base">0 Ticket</p>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ export default function TopupModal({ open, handleClose }) {
                         <div className=" py-3 bg-bgBlue rounded-lg cursor-pointer mt-4">
                             <p className="text-center text-white text-base font-SatoshiBold m-auto">Spend Tickets   </p>
                         </div>
-                        <p style={{color:"#2071EE"}} className="text-center text-sm font-SatoshiMedium mx-auto mt-3.5 underline">Buy Tickets ?</p>
+                        <p style={{ color: "#2071EE" }} className="text-center text-sm font-SatoshiMedium mx-auto mt-3.5 underline">Buy Tickets ?</p>
 
 
                     </div>
