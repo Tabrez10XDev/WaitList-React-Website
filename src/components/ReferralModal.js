@@ -16,12 +16,12 @@ export default function ReferralModal({ open, handleClose }) {
         position: "absolute",
         backgroundColor: "#FFF",
         // boxShadow: "2px solid black",
-        height: 500,
-        width: 800,
+
         margin: "auto",
         color: "white",
         className: "NFTModal",
       }}
+      className="h-[500px] w-[800px] max-[600px]:w-[95%]"
     >
       <div className="w-full h-full bg-white p-5 rounded-lg NFTModal ">
         <div className="flex items-center justify-between">
@@ -104,8 +104,7 @@ export default function ReferralModal({ open, handleClose }) {
                 <img alt="" className="size-6" src={xLogo} />
                 <img alt="" className="size-6 ml-3" src={xLogo} />
                 <img alt="" className="size-6 ml-3" src={xLogo} />
-                <img alt="" className="size-6 ml-3" src={xLogo} />
-                <img alt="" className="size-6 ml-3" src={xLogo} />
+
               </div>
             </div>
 

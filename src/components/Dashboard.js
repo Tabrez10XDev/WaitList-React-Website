@@ -124,19 +124,21 @@ export default function Dashboard() {
 
         <Navbar handleOpenTicket={handleOpenTicket} handleOpenCoin={handleOpenCoin}/>
 
-        <div className="w-11/12 mx-auto flex items-start">
-            <div className="w-4/6">
-                <p className="font-SatoshiBold text-2xl text-left">
+        <div className="w-11/12 mx-auto flex items-start max-[600px]:flex-col-reverse">
+            <div className="w-4/6 max-[600px]:w-full">
+                <p className="font-SatoshiBold text-2xl text-left max-[600px]:mt-6">
                     Get Defy Insiders <span className="bg-gradient-to-r from-purple to-blue text-transparent bg-clip-text">NFT</span>
                 </p>
                 <p className="font-SatoshiMedium text-base text-grey text-left mt-3">
                     Earn coins to buy chest and get Defy Insiders NFT collection and early access to app.
                 </p>
-                <div className="flex mt-8">
-                    <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
+                <div className="flex mt-8 max-w-[100vw] overflow-x-scroll">
+                <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+
+                   <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
                     <ChestCard onclick={handleOpenChest} startColour={'01D1F7'} endColour={'077BB3'} image={chest2} />
-                    <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
-                    <ChestCard onclick={handleOpenChest} startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} />
+                    {/*  <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+                    <ChestCard onclick={handleOpenChest} startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} /> */}
 
                 </div>
 
@@ -144,7 +146,7 @@ export default function Dashboard() {
                     Recommended Task
                 </p>
 
-                <div className="flex justify-start align-items">
+                <div className="flex justify-start align-items overflow-x-scroll">
                     <div onClick={() => setCategory(0)}
                         className={category == 0 ? "selected-div" : "unselected-div"}>
                         <p className={category == 0 ? "selected" : "unselected"}>All(32)</p>
@@ -188,7 +190,7 @@ return (                <TaskX ele={ele} onclick={handleOpenTask} />
 
             </div>
 
-            <div className="w-2/6 flex flex-col items-end justify-center px-8">
+            <div className="w-2/6 flex flex-col items-end justify-center px-8 max-[600px]:w-full max-[600px]:flex-col-reverse max-[600px]:px-0">
                 <div className="w-full h-auto rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
                     style={{
                         backgroundImage: `url(${bgRay})`,

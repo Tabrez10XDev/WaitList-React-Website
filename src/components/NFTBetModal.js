@@ -61,6 +61,8 @@ export default function NFTBetModal({ open, handleClose }) {
 
   const [marqueeValue, setMarqueeValue] = useState(0);
 
+
+
   async function handleClick() {
     setMarqueeValue(50);
     await timeout(250);

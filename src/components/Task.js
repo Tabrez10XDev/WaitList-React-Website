@@ -59,13 +59,13 @@ export const TaskX = ({ onclick, ele }) => {
         />
       </div>
       <div className="ml-1">
-        <p className="text-left font-SatoshiBold text-lg">{ele.title}</p>
-        <p className="text-left font-SatoshiMedium text-base">
+        <p className="text-left font-SatoshiBold text-lg max-[600px]:text-base">{ele.title}</p>
+        <p className="text-left font-SatoshiMedium text-base max-[600px]:text-sm">
           {ele.description}
         </p>
       </div>
     </div>
-    <div className="px-2 rounded-full bg-white flex items-center justify-center max-h-10 ">
+    <div className="px-2 rounded-full bg-white flex items-center justify-center max-h-10 min-w-[120px] ">
       <p className="font-SatoshiBold text-base text-textGreyDark">
         {ele.points} Coins
       </p>

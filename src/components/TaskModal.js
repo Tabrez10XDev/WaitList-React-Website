@@ -6,8 +6,10 @@ import profilePic from "../assets/profilePic.png"
 import coinAnim from "../assets/coinAnim.gif"
 import groupProfile from "../assets/groupProfile.svg"
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import axios from "axios";
+import CONST from "../Constants"
 
-export default function TaskModal({open, handleClose, state}){
+export default function TaskModal({ open, handleClose, state }) {
 
     const {
         connect,
@@ -22,72 +24,103 @@ export default function TaskModal({open, handleClose, state}){
         signMessage,
     } = useWallet();
 
-    
-    return(
-        <Modal  
-        onClose={handleClose}
-        open={open}
-        style={{
-            position: "absolute",
-            backgroundColor: "#FFF",
-            // boxShadow: "2px solid black",
-            height: 500,
-            width: 800,
-            margin: "auto",
-            color: "white",
-            className:'NFTModal'
-        }}
-    >
-        <div className="w-full h-full bg-white p-5 rounded-lg NFTModal">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                        <img className="h-8 w-8 object-contain" src={xLogo}/>
+
+    function connectDiscord() {
+
+        axios.get(`${CONST.baseUrl}/auth/discord?walletId=${account?.address}&taskId=${state.task['_id']}`).then((response) => {
+
+        }).catch((err) => {
+
+        })
+    }
+
+
+    function connectTwitter() {
+        axios.get(`${CONST.baseUrl}/auth/twitter?walletId=${account?.address}&taskId=${state.task['_id']}`).then((response) => {
+
+        }).catch((err) => {
+
+        })
+    }
+
+    function connectGoogle() {
+        axios.get(`${CONST.baseUrl}/auth/google?walletId=${account?.address}&taskId=${state.task['_id']}`).then((response) => {
+
+        }).catch((err) => {
+
+        })
+    }
+
+    function handleClick() {
+        if (state.task.type == "discordJoinServer") {
+            connectDiscord()
+        }
+    }
+
+
+    return (
+        <Modal
+            onClose={handleClose}
+            open={open}
+            style={{
+                position: "absolute",
+                backgroundColor: "#FFF",
+                margin: "auto",
+                color: "white",
+                className: 'NFTModal'
+            }}
+            className="h-[500px] w-[800px] max-[600px]:w-[95%]"
+        >
+            <div className="w-full h-full bg-white p-5 rounded-lg NFTModal">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <img className="h-8 w-8 object-contain" src={xLogo} />
                         <p className="text-xl font-SatoshiBold ml-2 text-black text-center">{state.task.title}</p>
 
-                </div>
-                <div className="flex items-center">
-                        <img className="h-6 w-6 object-contain mr-2"  src={profilePic}/>
-{
-account &&                        <p className="text-xs font-SatoshiMedium text-black text-center">{account.address.substring(0,8)}....{account.address.slice(-8)}</p>
-}
-                </div>
-            </div>
-
-            <div className="flex p-2">
-                <div style={{flex:2}} className="p-4">
-                    <img className="w-full object-contain" src={twitterConnectPoster}/>
-                    <p className="font-SatoshiMedium text-base text-textGreyDark text-left">
-                        Description:<br/>{state.task.description}
-                    </p>
-
+                    </div>
+                    <div className="flex items-center">
+                        <img className="h-6 w-6 object-contain mr-2" src={profilePic} />
+                        {
+                            account && <p className="text-xs font-SatoshiMedium text-black text-center">{account.address.substring(0, 8)}....{account.address.slice(-8)}</p>
+                        }
+                    </div>
                 </div>
 
-                <div className="flex-1 p-2">
-                    <div className="size-full h-auto bg-greyVeryLight rounded-xl">
-                        <img className="m-auto w-2/3 object-contain" src={coinAnim}/>
+                <div className="flex p-2 max-[600px]:flex-col">
+                    <div style={{ flex: 2 }} className="p-4">
+                        <img className="w-full object-contain" src={twitterConnectPoster} />
+                        <p className="font-SatoshiMedium text-base text-textGreyDark text-left">
+                            Description:<br />{state.task.description}
+                        </p>
+
                     </div>
 
-                    <div className="stroke-borderGrey border rounded py-1.5 px-2 mt-3">
-                        <p className="font-SatoshiMedium text-sm text-left text-black">Rewards:</p>
-                        <div className="flex items-center justify-between">
-                        <p className="font-SatoshiMedium text-xs text-left text-textGreyDark">You get:</p>
-                        <p className="font-SatoshiMedium text-xs text-right">X 500 Coins</p>
-
+                    <div className="flex-1 p-2">
+                        <div className="size-full h-auto bg-greyVeryLight rounded-xl max-[600px]:hidden">
+                            <img className="m-auto w-2/3 object-contain" src={coinAnim} />
                         </div>
-                    </div>
 
-                    <div className="flex items-center mt-10">
-                        <img className="h-5 w-5 object-contain" src={groupProfile}/>
-                        <p className="ml-2 font-SatoshiMedium text-textGreyLight text-sm">234 Participants</p>
-                    </div>
+                        <div className="stroke-borderGrey border rounded py-1.5 px-2 mt-3">
+                            <p className="font-SatoshiMedium text-sm text-left text-black">Rewards:</p>
+                            <div className="flex items-center justify-between">
+                                <p className="font-SatoshiMedium text-xs text-left text-textGreyDark">You get:</p>
+                                <p className="font-SatoshiMedium text-xs text-right">X 500 Coins</p>
 
-                    <div className="px-6  py-2.5 rounded-lg bg-bgBlue flex items-center justify-center mt-3">
+                            </div>
+                        </div>
+
+                        <div className="flex items-center mt-10">
+                            <img className="h-5 w-5 object-contain" src={groupProfile} />
+                            <p className="ml-2 font-SatoshiMedium text-textGreyLight text-sm">234 Participants</p>
+                        </div>
+
+                        <div onClick={handleClick} className="px-6  py-2.5 rounded-lg bg-bgBlue flex items-center justify-center mt-3 cursor-pointer">
                             <p className="font-SatoshiMedium text-base text-white">Connect X</p>
                         </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </Modal>
+        </Modal>
     )
 }
