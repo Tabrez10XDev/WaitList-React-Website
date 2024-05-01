@@ -5,8 +5,24 @@ import twitterConnectPoster from "../assets/twitterConnectPoster.png"
 import profilePic from "../assets/profilePic.png"
 import coinAnim from "../assets/coinAnim.gif"
 import groupProfile from "../assets/groupProfile.svg"
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
-export default function TaskModal({open, handleClose}){
+export default function TaskModal({open, handleClose, state}){
+
+    const {
+        connect,
+        account,
+        network,
+        connected,
+        disconnect,
+        wallet,
+        wallets,
+        signAndSubmitTransaction,
+        signTransaction,
+        signMessage,
+    } = useWallet();
+
+    
     return(
         <Modal  
         onClose={handleClose}
@@ -26,13 +42,14 @@ export default function TaskModal({open, handleClose}){
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                         <img className="h-8 w-8 object-contain" src={xLogo}/>
-                        <p className="text-xl font-SatoshiBold ml-2 text-black text-center">Connect in X</p>
+                        <p className="text-xl font-SatoshiBold ml-2 text-black text-center">{state.task.title}</p>
 
                 </div>
                 <div className="flex items-center">
                         <img className="h-6 w-6 object-contain mr-2"  src={profilePic}/>
-                        <p className="text-xs font-SatoshiMedium text-black text-center">0xa19009....13454</p>
-
+{
+account &&                        <p className="text-xs font-SatoshiMedium text-black text-center">{account.address.substring(0,8)}....{account.address.slice(-8)}</p>
+}
                 </div>
             </div>
 
@@ -40,12 +57,9 @@ export default function TaskModal({open, handleClose}){
                 <div style={{flex:2}} className="p-4">
                     <img className="w-full object-contain" src={twitterConnectPoster}/>
                     <p className="font-SatoshiMedium text-base text-textGreyDark text-left">
-                        Description:<br/>Claim 1000 coins by making a meme on the topic “Move On”.
+                        Description:<br/>{state.task.description}
                     </p>
-                    <p className="font-SatoshiMedium text-base text-textGreyDark text-left mt-2">
-                    Follow the instructions below:<br/>- Make a meme on the topic “Move On”. You can take some examples here:<br/>
-                    Link 1, Link 2.<br/>- Post the meme on X and tag @defy.<br/>- Enter the link to your post here.
-                    </p>
+
                 </div>
 
                 <div className="flex-1 p-2">

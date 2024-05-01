@@ -2,7 +2,7 @@ import Modal from "@material-ui/core/Modal";
 import close from "../assets/close.svg";
 import "../App.css";
 import sound from "../assets/sound.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import yellowDiamond from "../assets/yellow_diamond.svg";
 import nft1 from "../assets/nft1.png";
 import ethLogo from "../assets/ethLogo.svg";
@@ -11,13 +11,20 @@ import dogeLogo from "../assets/dogeLogo.svg";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import horse from "../assets/horse.png";
 import blueTicket from "../assets/blueTicket.png";
 import groupProfile from "../assets/groupProfile.svg";
 import Marquee from "react-fast-marquee";
 import MarqueeItem from "./MarqueeItem";
 import { motion } from "framer-motion";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
+
+const aptosConfig = new AptosConfig({
+  network: Network.MAINNET,
+})
+const aptos = new Aptos(aptosConfig);
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,6 +34,26 @@ export default function NFTBetModal({ open, handleClose }) {
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
+
+    const {
+      connect,
+      account,
+      network,
+      connected,
+      disconnect,
+      wallet,
+      wallets,
+      signAndSubmitTransaction,
+      signTransaction,
+      signMessage,
+  } = useWallet();
+
+// const account = {
+//   address: "0xd9acf245caa2f8b3df92b296708676ec4bcde4a948913f9a61e28b398d7dd762"}
+
+  const [rewards, setRewards] = useState({});
+  const [rewardNft, setRewardNft] = useState([]);
+  const [rewardNftV2, setRewardNftV2] = useState([]);
 
   const [betX, setBetX] = useState(0);
 
@@ -56,6 +83,45 @@ export default function NFTBetModal({ open, handleClose }) {
 
     setMarqueeValue(0);
   }
+
+
+  const getRewards = async () => {
+    try {
+      const rewards = await aptos.getAccountResource({
+        accountAddress: process.env.REACT_APP_RESOURCE_ADDR,
+        resourceType: `${process.env.REACT_APP_MODULE_ADDR}::nft_lottery::Rewards`
+      })
+      if (!rewards) return
+      const handle = rewards.rewards.handle;
+      const data = {
+        key_type: "address",
+        key: account?.address,
+        value_type: `${process.env.REACT_APP_MODULE_ADDR}::nft_lottery::Reward`,
+      }
+
+      let reward = await aptos.getTableItem({ handle, data })
+
+      setRewards({
+        apt: reward.apt.value,
+        free_spin: reward.free_spin,
+        raffle_ticket: reward.raffle_ticket,
+        web2_stars: reward.web2_stars
+      })
+
+      const nftv1 = reward.nft.map((nft) => nft.inner)
+      setRewardNft(nftv1)
+      const nftv2 = reward.nft_v2.map((nft) => nft.inner)
+      setRewardNftV2(nftv2)
+    }
+    catch (e) {
+      console.log('error', e)
+    }
+  }
+
+  useEffect(()=>{
+    if(open)
+      getRewards()
+  },[open])
 
   return (
     <Modal
@@ -400,7 +466,7 @@ export default function NFTBetModal({ open, handleClose }) {
                     Raffle Ticket
                   </p>
                   <p className="font-SatoshiMedium text-[10px] text-textGreyDark">
-                    x3
+                    x{rewards.raffle_ticket}
                   </p>
                 </div>
 
@@ -415,7 +481,7 @@ export default function NFTBetModal({ open, handleClose }) {
                     Coins
                   </p>
                   <p className="font-SatoshiMedium text-[10px] text-textGreyDark">
-                    x500
+                    x{rewards.web2_stars}
                   </p>
                 </div>
               </div>

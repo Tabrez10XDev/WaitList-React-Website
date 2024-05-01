@@ -5,16 +5,49 @@ import close from "../assets/close.svg"
 import NFTCard from "./NFTCard";
 import "../App.css"
 import nft1 from "../assets/nft1.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import search from "../assets/search.svg"
 import NFTBetModal from "./NFTBetModal";
+import axios from "axios";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
+import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+
+const aptosConfig = new AptosConfig({
+  network: Network.MAINNET,
+})
+const aptos = new Aptos(aptosConfig);
 
 export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
 
 
     const [isGrid, setIsGrid] = useState(true)
+    const [nfts, setNfts] = useState([]);
+    const [nftsV2, setNftsV2] = useState([]);
+
+    const getNfts = async () => {
+        try {
+          const lotteryManager = await aptos.getAccountResource({
+            accountAddress: process.env.REACT_APP_RESOURCE_ADDR,
+            resourceType: `${process.env.REACT_APP_MODULE_ADDR}::nft_lottery::LotteryManager`
+          })
+          if (!lotteryManager) return
+          const nft_v1 = lotteryManager.nft_v1.map((nft) => nft.inner)
+          console.log(nft_v1);
+          setNfts(nft_v1)
+          const nft_v2 = lotteryManager.nft_v2.map((nft) => nft.inner)
+          setNftsV2(nft_v2)
+
+        }
+        catch (e) {
+          console.log('error', e)
+        }
+      }
 
 
+      useEffect(()=>{
+        if(open)
+            getNfts()
+      },[open])
 
     return (
         <Modal
@@ -69,22 +102,11 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                 {isGrid ? <div style={{
                     flexWrap: 'wrap'
                 }} className="w-full h-full flex overflow-y-scroll flex-1 mt-2 ">
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
-                    <NFTCard onclick={handleOpenNFT} />
+{
+[...nfts,...nftsV2].map((ele)=>{
+return (    <NFTCard onclick={handleOpenNFT} />
+)})                   
+}
                    
                 </div> :
                     <div style={{
