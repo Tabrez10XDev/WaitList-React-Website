@@ -3,7 +3,7 @@ import chest2 from "../assets/chest2.png"
 import chest3 from "../assets/chest3.png"
 import chest4 from "../assets/chest4.png"
 import ChestCard from "./ChestCard"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TaskVolt, TaskX } from "./Task"
 import yellowDiamond from "../assets/yellow_diamond.svg"
 import bgRay from "../assets/bgRay.png"
@@ -20,12 +20,18 @@ import ChestModal from "./ChestModal"
 import ReferralModal from "./ReferralModal"
 import ChooseNFTModal from "./ChooseNFTModal"
 import NFTBetModal from "./NFTBetModal"
+import axios from "axios"
+import CONST from "../Constants"
 
 export default function Dashboard() {
 
     const [category, setCategory] = useState(0)
 
     const [openTicket, setOpenTicket] = useState(false);
+
+    const [state, setState] = useState({
+        task: {}
+    })
  
     const handleCloseTicket = () => {
         setOpenTicket(false);
@@ -51,8 +57,12 @@ export default function Dashboard() {
         setOpenTask(false);
     };
  
-    const handleOpenTask = () => {
-        setOpenTask(true);
+    const handleOpenTask = (id) => {
+        axios.get(`${CONST.baseUrl}/tasks/${id}`).then((response)=>{
+            setState(curr => ({...curr, task: response.data.data}))
+            setOpenTask(true);
+
+        })
     };
 
     const [openChest, setOpenChest] = useState(false);
@@ -71,7 +81,7 @@ export default function Dashboard() {
         setOpenReferral(false);
     };
  
-    const handleOpenReferral = () => {
+    const handleOpenReferral = (id) => {
         setOpenReferral(true);
     };
 
@@ -95,24 +105,40 @@ export default function Dashboard() {
         setOpenNFT(true);
     };
 
+    function fetchTasks(){
+        axios.get(`${CONST.baseUrl}/tasks`).then((response)=>{
+            setTasks(response.data.data)
+        })
+    }
+
+
+    useEffect(()=>{
+        fetchTasks()
+    },[])
+
+
+    const [tasks, setTasks] = useState([])
+
     return (
         <div className="">
 
         <Navbar handleOpenTicket={handleOpenTicket} handleOpenCoin={handleOpenCoin}/>
 
-        <div className="w-11/12 mx-auto flex">
-            <div className="w-4/6">
-                <p className="font-SatoshiBold text-2xl text-left">
+        <div className="w-11/12 mx-auto flex items-start max-[600px]:flex-col-reverse">
+            <div className="w-4/6 max-[600px]:w-full">
+                <p className="font-SatoshiBold text-2xl text-left max-[600px]:mt-6">
                     Get Defy Insiders <span className="bg-gradient-to-r from-purple to-blue text-transparent bg-clip-text">NFT</span>
                 </p>
                 <p className="font-SatoshiMedium text-base text-grey text-left mt-3">
                     Earn coins to buy chest and get Defy Insiders NFT collection and early access to app.
                 </p>
-                <div className="flex mt-8">
-                    <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
+                <div className="flex mt-8 max-w-[100vw] overflow-x-scroll">
+                <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+
+                   <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
                     <ChestCard onclick={handleOpenChest} startColour={'01D1F7'} endColour={'077BB3'} image={chest2} />
-                    <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
-                    <ChestCard onclick={handleOpenChest} startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} />
+                    {/*  <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+                    <ChestCard onclick={handleOpenChest} startColour={'FFDF7A'} endColour={'E5A11B'} image={chest4} /> */}
 
                 </div>
 
@@ -120,7 +146,7 @@ export default function Dashboard() {
                     Recommended Task
                 </p>
 
-                <div className="flex justify-start align-items">
+                <div className="flex justify-start align-items overflow-x-scroll">
                     <div onClick={() => setCategory(0)}
                         className={category == 0 ? "selected-div" : "unselected-div"}>
                         <p className={category == 0 ? "selected" : "unselected"}>All(32)</p>
@@ -155,13 +181,16 @@ export default function Dashboard() {
 
                 </div>
                 <div className="h-[1px] w-full bg-textGreyLight" />
-                <TaskX onclick={handleOpenTask} />
-
+{ tasks.map((ele,inx)=>{
+return (                <TaskX ele={ele} onclick={handleOpenTask} />
+)
+})
+}
 
 
             </div>
 
-            <div className="w-2/6 flex flex-col items-end justify-center px-8">
+            <div className="w-2/6 flex flex-col items-end justify-center px-8 max-[600px]:w-full max-[600px]:flex-col-reverse max-[600px]:px-0">
                 <div className="w-full h-auto rounded-2xl bg-greyVeryLight stroke-borderGrey border-l relative px-6 py-4"
                     style={{
                         backgroundImage: `url(${bgRay})`,
@@ -175,7 +204,7 @@ export default function Dashboard() {
                             <p className="font-SatoshiMedium text-sm text-grey">Remaining</p>
 
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between items-end mt-[-4px]">
                             <p className="font-SatoshiMedium text-xs text-grey">Collect Coins to Open Free Chest</p>
                             <div className="flex">
                                 <p className="font-SatoshiMedium text-base">2287</p>
@@ -243,11 +272,11 @@ export default function Dashboard() {
 
         <TicketModal open={openTicket} handleClose={handleCloseTicket}/>
         <CoinModal open={openCoin} handleClose={handleCloseCoin}/>
-        <TaskModal open={openTask} handleClose={handleCloseTask}/>
+        <TaskModal state={state} open={openTask} handleClose={handleCloseTask}/>
         <ChestModal open={openChest} handleClose={handleCloseChest}/>
         <ReferralModal open={openReferral} handleClose={handleCloseReferral}/>
         <ChooseNFTModal open={openChooseNFT} handleClose={handleCloseChooseNFT} handleOpenNFT={handleOpenNFT}/>
-        <NFTBetModal open={openNFT} handleClose={handleCloseNFT}/>
+        <NFTBetModal  open={openNFT} handleClose={handleCloseNFT}/>
 
         </div>
     )
