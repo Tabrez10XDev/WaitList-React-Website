@@ -32,30 +32,34 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.chest-card{
-  transition: transform 0.3s ease; /* Add a smooth transition */
+.chest-card {
+  transition: transform 0.3s ease;
+  /* Add a smooth transition */
 
 }
 
 .chest-card:hover {
-  transform: translateY(-50px); /* Translate 10px up on hover */
-  animation: blink 0.5s forwards; /* Apply the blink-once animation */
+  transform: translateY(-50px);
+  /* Translate 10px up on hover */
+  animation: blink 0.5s forwards;
+  /* Apply the blink-once animation */
 
 }
 
-.unselected{
+.unselected {
   font-size: 16px;
   font-family: 'SatoshiMedium';
   color: #646D80;
   margin: auto;
 }
 
-.selected{
+.selected {
   font-size: 16px;
   font-family: 'SatoshiMedium';
   color: white;
@@ -64,44 +68,44 @@
 }
 
 .arrow-up {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 
-  
+
   border-bottom: 5px solid black;
 }
 
 .arrow-up-marquee {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 
-  
+
   border-bottom: 5px solid #2071EE;
 }
 
 .arrow-down {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  
+
   border-top: 5px solid black;
 }
 
 .arrow-down-marquee {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  
+
   border-top: 8px solid #2071EE;
 }
 
-.selected-div{
+.selected-div {
   cursor: pointer;
   font-size: 16px;
   font-family: 'SatoshiMedium';
@@ -124,7 +128,7 @@
   outline: none !important;
 }
 
-.RaffleWinnersSelectedDiv{
+.RaffleWinnersSelectedDiv {
   border-radius: 30px;
   background-color: white;
   cursor: pointer;
@@ -132,14 +136,14 @@
   width: 50%;
 }
 
-.RaffleWinnersSelected{
+.RaffleWinnersSelected {
   color: black;
   margin: auto;
   font-family: 'SatoshiMedium';
   font-size: 14px;
 }
 
-.RaffleWinnersUnselectedDiv{
+.RaffleWinnersUnselectedDiv {
   border-radius: 30px;
   cursor: pointer;
   background-color: transparent;
@@ -147,7 +151,7 @@
   width: 50%;
 }
 
-.RaffleWinnersUnselected{
+.RaffleWinnersUnselected {
   color: #979DAA;
   margin: auto;
   font-family: 'SatoshiMedium';
@@ -155,7 +159,7 @@
 }
 
 
-.unselected-div{
+.unselected-div {
   cursor: pointer;
   padding-left: 12px;
   display: flex;
@@ -168,32 +172,75 @@
 }
 
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .task-holder:hover .task-to-top {
-  transform: translate(-56px, -30px ); /* Adjust the value as needed */
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  transform: translate(-56px, -30px);
+  /* Adjust the value as needed */
+  transition: transform 0.3s ease;
+  /* Add a smooth transition effect */
 }
 
 .task-to-top {
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  transition: transform 0.3s ease;
+  /* Add a smooth transition effect */
 }
 
 .task-holder:hover .task-to-bottom {
-  transform: translate(-56px, 30px ); /* Adjust the value as needed */
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  transform: translate(-56px, 30px);
+  /* Adjust the value as needed */
+  transition: transform 0.3s ease;
+  /* Add a smooth transition effect */
 }
 
 .task-to-bottom {
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  transition: transform 0.3s ease;
+  /* Add a smooth transition effect */
 }
 
 .purple-gradient {
 
-  background: linear-gradient(45deg, #816CFF, #6053B1); /* Adjust colors as needed */
+  background: linear-gradient(45deg, #816CFF, #6053B1);
+  /* Adjust colors as needed */
+}
+
+
+.wallet-button {
+  background-color: black !important;
+  color: white;
+  margin-left: 0.5rem;
+  border-radius: 35px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.wallet-menu-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.wallet-name-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.wallet-button:hover {
+  background-color: black;
 }
 
 
@@ -221,14 +268,14 @@
   }
 
 
- 
+
   .menu-icon {
     display: block;
     position: absolute;
-    right:18px;
+    right: 18px;
     object-fit: contain;
     height: 24px;
-    
+
     cursor: pointer;
   }
 
@@ -253,6 +300,8 @@
     width: 280px;
   }
 
+
+
   .nav-elements ul {
     display: flex;
     flex-direction: column;
@@ -261,7 +310,7 @@
   .nav-elements ul li {
     margin-right: unset;
     margin-top: 22px;
-  
-  
+
+
   }
 }

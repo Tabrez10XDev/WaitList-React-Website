@@ -7,7 +7,7 @@ import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { useState } from "react";
 import menu from "../assets/menu.svg"
 import { Link } from "react-router-dom";
-
+import "../App.css"
 export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
 
 

@@ -73,7 +73,7 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                             />
                             <img className="size-5 object-contain absolute right-2 top-1/2 transform -translate-y-1/2" src={search} />
                         </div>
-                        <div onClick={() => setIsGrid(current => !current)} className="flex items-center cursor-pointer">
+                        {/* <div onClick={() => setIsGrid(current => !current)} className="flex items-center cursor-pointer">
                             {
                                 isGrid ? <img className="size-5 mr-8 max-[600px]:mr-4" src={sortGrid} />
                                     : <img className="size-5 mr-8 max-[600px]:mr-4" src={sortList} />
@@ -82,7 +82,7 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                             }
                             <img onClick={handleClose} className="size-5 cursor-pointer" src={close} />
 
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>

@@ -155,8 +155,9 @@ export default function Dashboard() {
                     <p className="font-SatoshiMedium text-base text-grey text-left mt-3">
                         Earn coins to buy chest and get Defy Insiders NFT collection and early access to app.
                     </p>
-                    <div className="flex mt-8 max-w-[100vw] overflow-x-scroll">
+                    <div className="flex mt-8 max-w-[100vw] overflow-x-scroll py-2">
                         <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest3} />
+                        <ChestCard onclick={handleOpenChest} startColour={'64C5B2'} endColour={'2F9B86'} image={chest4} />
 
                         <ChestCard onclick={handleOpenChest} startColour={'DA55F9'} endColour={'9225FA'} image={chest1} />
                         <ChestCard onclick={handleOpenChest} startColour={'01D1F7'} endColour={'077BB3'} image={chest2} />
