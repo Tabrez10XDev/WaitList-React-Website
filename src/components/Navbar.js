@@ -6,6 +6,7 @@ import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { useState } from "react";
 import menu from "../assets/menu.svg"
+import { Link } from "react-router-dom";
 
 export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
 
@@ -31,10 +32,10 @@ export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
         </div>
         <ul className={`flex items-center justify-center nav-elements ${showNavbar && 'active'}`}>
           <li>
-            <a className="font-SatoshiMedium text-xl mr-6">Quest</a>
+          <Link to={{pathname: '/'}} className="font-SatoshiMedium text-xl mr-6">Quest</Link>
           </li>
           <li>
-            <a className="font-SatoshiMedium text-xl mr-6">Raffle</a>
+            <Link to={{pathname: '/raffle'}} className="font-SatoshiMedium text-xl mr-6">Raffle</Link>
           </li>
           <li>
             <a className="font-SatoshiMedium text-xl mr-6">Leaderboard</a>

@@ -10,6 +10,7 @@ import search from "../assets/search.svg"
 import NFTBetModal from "./NFTBetModal";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { fetchNftV1, fetchNftV2 } from "../utils/indexer";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
 
 const aptosConfig = new AptosConfig({
   network: Network.MAINNET,
@@ -25,6 +26,7 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
     const fetchNfts = async () => {
         const moduleAddress = process.env.REACT_APP_MODULE_ADDR;
         const nfts = await fetchNftV1(moduleAddress);
+        console.log(nfts,"asdasd");
         setNfts(nfts);
         const nftsV2 = await fetchNftV2(moduleAddress);
         setNftsV2(nftsV2);
