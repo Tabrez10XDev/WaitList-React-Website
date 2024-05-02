@@ -16,7 +16,7 @@ function App() {
     <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Dashboard />} ></Route>
+          <Route exact path="/" element={<Dashboard />} />
           <Route path="/raffle" element={<Raffle />} />
         </Routes>
       </Router>
