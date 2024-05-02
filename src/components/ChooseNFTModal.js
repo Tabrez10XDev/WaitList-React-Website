@@ -8,8 +8,6 @@ import nft1 from "../assets/nft1.png"
 import { useState, useEffect } from "react";
 import search from "../assets/search.svg"
 import NFTBetModal from "./NFTBetModal";
-import axios from "axios";
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { fetchNftV1, fetchNftV2 } from "../utils/indexer";
 
@@ -20,32 +18,22 @@ const aptos = new Aptos(aptosConfig);
 
 export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
 
-
     const [isGrid, setIsGrid] = useState(true)
     const [nfts, setNfts] = useState([]);
     const [nftsV2, setNftsV2] = useState([]);
 
-    const getNfts = async () => {
-        try {
+    const fetchNfts = async () => {
+        const moduleAddress = process.env.REACT_APP_MODULE_ADDR;
+        const nfts = await fetchNftV1(moduleAddress);
+        setNfts(nfts);
+        const nftsV2 = await fetchNftV2(moduleAddress);
+        setNftsV2(nftsV2);
+    }
 
-            console.log(await fetchNftV1(process.env.REACT_APP_MODULE_ADDR))
-        //   const nft_v1 = fetchNftV1()
-        //     console.log(nft_v1);
-        //   setNfts(nft_v1)
-        //   const nft_v2 = fetchNftV2()
-        //   setNftsV2(nft_v2)
-
-        }
-        catch (e) {
-          console.log('error', e)
-        }
-      }
-
-
-      useEffect(()=>{
-        if(open)
-            getNfts()
-      },[open])
+    useEffect(() => {
+        if (open)
+            fetchNfts();
+    }, [open])
 
     return (
         <Modal
@@ -100,12 +88,13 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                 {isGrid ? <div style={{
                     flexWrap: 'wrap'
                 }} className="w-full h-full flex overflow-y-scroll flex-1 mt-2 ">
-{
-[...nfts,...nftsV2].map((ele)=>{
-return (    <NFTCard onclick={handleOpenNFT} />
-)})                   
-}
-                   
+                    {
+                        [...nfts, ...nftsV2].map((ele) => {
+                            return (<NFTCard nft={ele} onclick={handleOpenNFT} />
+                            )
+                        })
+                    }
+
                 </div> :
                     <div style={{
                         flexWrap: 'wrap'

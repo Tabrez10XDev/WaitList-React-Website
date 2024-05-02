@@ -15,7 +15,7 @@ const fetchNftV1 = async (moduleAddress) => {
     const nfts = await aptos.view(
         {
             payload: {
-                function: `${moduleAddress}::nft_lottery::see_nft_v1_names`
+                function: `${moduleAddress}::nft_lottery::see_nft_details`
             }
         }
     )
@@ -30,7 +30,7 @@ const fetchNftV1 = async (moduleAddress) => {
     await Promise.all(
 
         nfts[0].map(async (element) => {
-            const tokenId = encodeURI(element);
+            const tokenId = encodeURI(element.token_name);
             const query = `
             query MyQuery($id: String = "") {
                 aptos {
@@ -59,11 +59,20 @@ const fetchNftV1 = async (moduleAddress) => {
             try {
                 const metadata = await fetch(mediaUrl)
                 const metadataJson = await metadata.json()
-                console.log(metadataJson)
-                nftImages.push(metadataJson?.image)
+                nftImages.push({
+                    image: metadataJson?.image,
+                    name: element.token_name,
+                    store: element.store.inner,
+                    floorPrice: element.token_floor_price,
+                })
             }
             catch (error) {
-                nftImages.push(mediaUrl)
+                nftImages.push({
+                    image: mediaUrl,
+                    name: element.token_name,
+                    store: element.store.inner,
+                    floorPrice: element.token_floor_price,
+                })
             }
         })
     )
@@ -75,7 +84,7 @@ const fetchNftV2 = async (moduleAddress) => {
     const nfts = await aptos.view(
         {
             payload: {
-                function: `${moduleAddress}::nft_lottery::see_nft_v2_address`
+                function: `${moduleAddress}::nft_lottery::see_nft_v2_details`
             }
         }
     )
@@ -89,7 +98,7 @@ const fetchNftV2 = async (moduleAddress) => {
 
     await Promise.all(
         nfts[0].map(async (element) => {
-            const tokenId = element?.inner;
+            const tokenId = element?.token_address?.inner;
             const query = `
                 query MyQuery($id: String = "") {
                     aptos {
@@ -116,9 +125,19 @@ const fetchNftV2 = async (moduleAddress) => {
             try {
                 const metadata = await fetch(mediaUrl);
                 const metadataJson = await metadata.json();
-                nftImages.push(metadataJson?.image);
+                nftImages.push({
+                    image: metadataJson?.image,
+                    name: element.token_address.inner,
+                    store: element.store.inner,
+                    floorPrice: element.token_floor_price,
+                });
             } catch (error) {
-                nftImages.push(mediaUrl);
+                nftImages.push({
+                    image: mediaUrl,
+                    name: element.token_address.inner,
+                    store: element.store.inner,
+                    floorPrice: element.token_floor_price,
+                });
             }
         })
     );
