@@ -46,23 +46,22 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                 backgroundColor: "#FFF",
                 // boxShadow: "2px solid black",
                 height: '80vh',
-                width: '80vw',
                 margin: "auto",
                 outlineWidth: 0,
                 outline: 'none',
                 color: "white",
             }}
             outline='none'
-            className="NFTModal"
+            className="NFTModal max-[600px]:w-[95vw] w-[80vw]"
         >
-            <div className="w-full h-full bg-white px-5 py-6 rounded-lg flex flex-col NFTModal">
-                <div className="flex items-center justify-between">
-                    <div style={{ flex: 3 }}>
+            <div className="w-full h-full bg-white px-5 py-6 rounded-lg flex flex-col NFTModal max-[600px]:px-2">
+                <div className="flex items-center justify-between max-[600px]:flex-col-reverse">
+                    <div className="max-[600px]:mt-5" style={{ flex: 3 }}>
                         <p className="font-SatoshiBold text-base text-black text-left">Choose NFT to Raffle</p>
                         <p className="font-SatoshiMedium text-sm text-textGreyDark text-left">Select NFT to Raffle and win other exciting Prizes</p>
 
                     </div>
-                    <div style={{ flex: 2 }} className="flex items-center justify-between">
+                    <div style={{ flex: 2 }} className="flex items-center justify-between max-[600px]:w-full">
                         <div className="relative">
                             <input
                                 style={{
@@ -70,14 +69,14 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                                 }}
                                 type="text"
                                 placeholder="Search Tokens"
-                                className="bg-greyVeryLight text-textGreyLight px-2 py-2 rounded-md focus:outline-none stroke-none border-none min-h-9 min-w-80"
+                                className="bg-greyVeryLight text-textGreyLight px-2 py-2 rounded-md focus:outline-none stroke-none border-none min-h-9 min-w-80 max-[600px]:min-w-[280px]"
                             />
                             <img className="size-5 object-contain absolute right-2 top-1/2 transform -translate-y-1/2" src={search} />
                         </div>
                         <div onClick={() => setIsGrid(current => !current)} className="flex items-center cursor-pointer">
                             {
-                                isGrid ? <img className="size-5 mr-8" src={sortGrid} />
-                                    : <img className="size-5 mr-8" src={sortList} />
+                                isGrid ? <img className="size-5 mr-8 max-[600px]:mr-4" src={sortGrid} />
+                                    : <img className="size-5 mr-8 max-[600px]:mr-4" src={sortList} />
 
 
                             }
@@ -89,7 +88,7 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
                 </div>
                 {isGrid ? <div style={{
                     flexWrap: 'wrap'
-                }} className="w-full h-full flex overflow-y-scroll flex-1 mt-2 ">
+                }} className="w-full h-full flex overflow-y-scroll  flex-1 mt-2 ">
                     {
                         [...nfts, ...nftsV2].map((ele) => {
                             return (<NFTCard nft={ele} onclick={handleOpenNFT} />
