@@ -22,6 +22,7 @@ import ChooseNFTModal from "./ChooseNFTModal"
 import NFTBetModal from "./NFTBetModal"
 import axios from "axios"
 import CONST from "../Constants"
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 export default function Dashboard() {
 
@@ -32,6 +33,28 @@ export default function Dashboard() {
     const [state, setState] = useState({
         task: {}
     })
+
+    const {
+        connect,
+        account,
+        network,
+        connected,
+        disconnect,
+        wallet,
+        wallets,
+        signAndSubmitTransaction,
+        signTransaction,
+        signMessage,
+    } = useWallet();
+
+    // useEffect(()=>{
+    //     if(connected){
+    //         axios.get(`${CONST.baseUrl}/users/nonce`,{
+    //             "address":account?.address,
+    //             "publicKey": account?.publicKey
+    //         })
+    //     }
+    // },[connected])
  
     const handleCloseTicket = () => {
         setOpenTicket(false);

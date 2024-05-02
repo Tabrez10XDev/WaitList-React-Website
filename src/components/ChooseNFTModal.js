@@ -11,6 +11,7 @@ import NFTBetModal from "./NFTBetModal";
 import axios from "axios";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk"
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import { fetchNftV1, fetchNftV2 } from "../utils/indexer";
 
 const aptosConfig = new AptosConfig({
   network: Network.MAINNET,
@@ -26,16 +27,13 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
 
     const getNfts = async () => {
         try {
-          const lotteryManager = await aptos.getAccountResource({
-            accountAddress: process.env.REACT_APP_RESOURCE_ADDR,
-            resourceType: `${process.env.REACT_APP_MODULE_ADDR}::nft_lottery::LotteryManager`
-          })
-          if (!lotteryManager) return
-          const nft_v1 = lotteryManager.nft_v1.map((nft) => nft.inner)
-          console.log(nft_v1);
-          setNfts(nft_v1)
-          const nft_v2 = lotteryManager.nft_v2.map((nft) => nft.inner)
-          setNftsV2(nft_v2)
+
+            console.log(await fetchNftV1(process.env.REACT_APP_MODULE_ADDR))
+        //   const nft_v1 = fetchNftV1()
+        //     console.log(nft_v1);
+        //   setNfts(nft_v1)
+        //   const nft_v2 = fetchNftV2()
+        //   setNftsV2(nft_v2)
 
         }
         catch (e) {
