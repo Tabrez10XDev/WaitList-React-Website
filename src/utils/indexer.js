@@ -106,6 +106,7 @@ const fetchNftV2 = async (moduleAddress) => {
                         where: { token_id: { _eq: $id }}
                     ) {
                         media_url
+                        name
                     }
                     }
                 }`;
@@ -121,20 +122,21 @@ const fetchNftV2 = async (moduleAddress) => {
             });
 
             const mediaUrl = res?.data?.data?.aptos?.nfts[0]?.media_url;
+            const name = res?.data?.data?.aptos?.nfts[0]?.name;
 
             try {
                 const metadata = await fetch(mediaUrl);
                 const metadataJson = await metadata.json();
                 nftImages.push({
                     image: metadataJson?.image,
-                    name: element.token_address.inner,
+                    name,
                     store: element.store.inner,
                     floorPrice: element.token_floor_price,
                 });
             } catch (error) {
                 nftImages.push({
                     image: mediaUrl,
-                    name: element.token_address.inner,
+                    name,
                     store: element.store.inner,
                     floorPrice: element.token_floor_price,
                 });
