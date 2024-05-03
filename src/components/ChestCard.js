@@ -7,7 +7,7 @@ export default function ChestCard({ startColour, endColour, image, onclick }) {
   return (
     <div
       onClick={onclick}
-      className="h-[230px] w-[220px] rounded-xl custom-shadow p-2.5 chest-card mr-4 curson-pointer sm:w-[150px] sm:p-1.5 sm: "
+      className="h-[230px] !min-w-[220px] rounded-xl custom-shadow p-2.5 chest-card mr-4 curson-pointer"
     >
       <div
         style={{

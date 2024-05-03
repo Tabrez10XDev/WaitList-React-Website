@@ -61,6 +61,8 @@ export default function NFTBetModal({ open, handleClose }) {
 
   const [marqueeValue, setMarqueeValue] = useState(0);
 
+
+
   async function handleClick() {
     setMarqueeValue(50);
     await timeout(250);
@@ -131,8 +133,6 @@ export default function NFTBetModal({ open, handleClose }) {
         position: "absolute",
         backgroundColor: "#FFF",
         // boxShadow: "2px solid black",
-        height: "90vh",
-        width: "80vw",
         margin: "auto",
         borderRadius: 8,
         backdropFilter: "none",
@@ -141,9 +141,9 @@ export default function NFTBetModal({ open, handleClose }) {
         color: "white",
       }}
       outline="none"
-      className="NFTModal"
-    >
-      <div className="w-full h-full bg-white px-6 py-6 rounded-lg NFTModal">
+      className="NFTModal max-[600px]:w-[95vw] w-[80vw] h-[90vh] "
+      >
+      <div className="w-full h-full bg-white px-6 py-6 rounded-lg NFTModal overflow-y-scroll">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <img className="rounded h-10 w-10 object-cover" src={nft1} />
@@ -167,9 +167,9 @@ export default function NFTBetModal({ open, handleClose }) {
           </div>
         </div>
 
-        <div className="flex justify-between items-start w-full">
-          <div style={{ flex: 3, maxWidth: "66%" }}>
-            <div className="w-full h-[400px] bg-greyVeryLight py-5 mt-4">
+        <div className="flex justify-between items-start w-full max-[600px]:flex-col">
+          <div className="max-[600px]:max-w-[98%] max-w-[66%]" style={{ flex: 3 }}>
+            <div className="w-full h-[400px] bg-greyVeryLight py-5 mt-4 max-[600px]:h-[450px]">
               <p className="text-center font-SatoshiBold text-base text-black">
                 Your Favorite NFT at 1% price
               </p>
@@ -188,14 +188,16 @@ export default function NFTBetModal({ open, handleClose }) {
                 <div className="bg-black w-[2px] h-full absolute top-0 left-1/2 transform -translate-x-1/2 z-[100]"></div>
               </div>
 
-              <div className="flex items-center justify-between mt-14 text-black">
-                <div className="pl-6  absolute">
+              <div className="flex items-center justify-between mt-14 text-black max-[600px]:mt-5">
+                <div className="pl-6 ">
                   <b>Set Your Odds</b>
                 </div>
                 <div style={{ flex: 1 }}></div>
+              {/* Slider */}
+              
                 <div
                   style={{ flex: 2 }}
-                  className="relative items-start justify-center "
+                  className="relative items-start justify-center mt-10 max-[600px]:hidden "
                 >
                   <motion.div
                     animate={{
@@ -253,6 +255,8 @@ export default function NFTBetModal({ open, handleClose }) {
                     ></div>
                   </div>
                 </div>
+
+                {/* Slider */}
                 <div style={{ flex: 1 }}>
                   <div className="flex p-2 rounded-3xl w-28 h-10 ml-7 bg-white">
                     <input
@@ -333,7 +337,69 @@ export default function NFTBetModal({ open, handleClose }) {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between px-5 mt-4">
+
+              <div
+                  className="relative items-center justify-center mt-14 min-[600px]:hidden w-2/3 m-auto  "
+                >
+                  <motion.div
+                    animate={{
+                      left: `${(betX * 25).toString()}%`,
+                    }}
+                    style={{
+                      top: -40,
+                    }}
+                    className="absolute bg-textBlue py-1.5 px-2.5 rounded-full transform -translate-x-[45%]"
+                  >
+                    <p className="m-auto font-SatoshiMedium text-[10px] text-white w-16 text-center">
+                      {(betX + 1) * 100}x Upside
+                    </p>
+                    <div className="arrow-down-marquee absolute bottom-0 left-1/2 transform translate-y-3/4 -translate-x-1/2"></div>
+                  </motion.div>
+                  <div className="h-1 bg-borderGrey">
+                    <motion.div
+                      animate={{ width: `${(betX * 25).toString()}%` }}
+                      className="h-1 bg-textBlue"
+                    ></motion.div>
+                    <div
+                      onClick={() => setBetX(0)}
+                      style={{
+                        backgroundColor: betX >= 0 ? "#2071EE" : "#D9D9D9",
+                      }}
+                      className="h-3 w-3 rounded-full absolute left-0 top-0 transform -translate-y-1/3 cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setBetX(1)}
+                      style={{
+                        backgroundColor: betX >= 1 ? "#2071EE" : "#D9D9D9",
+                      }}
+                      className="h-3 w-3 bg-textBlue rounded-full absolute left-1/4 top-0 transform -translate-y-1/3 cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setBetX(2)}
+                      style={{
+                        backgroundColor: betX >= 2 ? "#2071EE" : "#D9D9D9",
+                      }}
+                      className="h-3 w-3 bg-textBlue rounded-full absolute left-2/4 top-0 transform -translate-y-1/3 cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setBetX(3)}
+                      style={{
+                        backgroundColor: betX >= 3 ? "#2071EE" : "#D9D9D9",
+                      }}
+                      className="h-3 w-3 bg-textBlue rounded-full absolute left-3/4 top-0 transform -translate-y-1/3 cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setBetX(4)}
+                      style={{
+                        backgroundColor: betX >= 4 ? "#2071EE" : "#D9D9D9",
+                      }}
+                      className="h-3 w-3 bg-textBlue rounded-full absolute left-full top-0 transform -translate-y-1/3 cursor-pointer"
+                    ></div>
+                  </div>
+                </div>
+
+
+              <div className="flex items-center justify-between px-5 mt-4 max-[600px]:mt-8">
                 <div className="w-2/3 py-3 bg-bgBlue rounded-lg cursor-pointer mx-2">
                   <p className="text-center text-white text-base font-SatoshiBold m-auto">
                     Place Bet
@@ -350,7 +416,7 @@ export default function NFTBetModal({ open, handleClose }) {
               </div>
             </div>
 
-            <div className="flex flex-row text-black ">
+            <div className="flex flex-row text-black  max-[600px]:hidden">
               <div className="px-5 py-2 w-1/2 m-2">
                 <b>Detail</b>
                 <table class="table-auto text-sm">
@@ -408,14 +474,14 @@ export default function NFTBetModal({ open, handleClose }) {
             </div>
           </div>
 
-          <div style={{ flex: 2, maxWidth: "33%" }}>
+          <div className="max-w-[33%] max-[600px]:max-w-[100%] w-[100%] m-auto min-[600px]:flex-[2_1_0%] max-[600px]:mt-5" style={{ flex: 2 }}>
             <div className="flex items-center justify-between">
               <p className="text-left font-SatoshiBold text-base text-black">
                 Your Rewards
               </p>
               <p
                 style={{ color: "#F09205" }}
-                className="text-right font-SatoshiBold text-base"
+                className="text-right font-SatoshiBold text-base max-[600px]:hidden"
               >
                 Hurray! Congratulations 👏🏻
               </p>

@@ -44,29 +44,30 @@ export default function Raffle() {
     return (
         <div>
             <Navbar handleOpenTicket={handleOpenTicket} handleOpenCoin={handleOpenCoin} />
-            <div className="flex items-start px-20 mt-[80px]">
+            <div className="flex items-start px-20 mt-[80px] max-[600px]:flex-col max-[600px]:px-4">
                 <div style={{ flex: 1 }}>
 
                     <p className="font-SatoshiMedium text-base text-textGreyDark text-left">#31</p>
                     <p className="font-SatoshiMedium text-3xl text-left mt-4">
                         Giveaway<span className="bg-gradient-to-r from-purple to-blue text-transparent bg-clip-text">Raffle</span>
                     </p>
-                    <p className="font-SatoshiMedium text-sm text-textGreyDark text-left mt-6">Get ready for a thrilling chance to jump the line! Our raffle feature offers an exciting opportunity for lucky participants to secure their spot on the Defy app waitlist. Simply enter the raffle, and if fortune smiles upon you, you'll be granted early access to the innovative Defy platform. Enter the raffle now and defy expectations!</p>
+                    <p className="font-SatoshiMedium text-sm text-textGreyDark text-left mt-6 max-[600px]:hidden">Get ready for a thrilling chance to jump the line! Our raffle feature offers an exciting opportunity for lucky participants to secure their spot on the Defy app waitlist. Simply enter the raffle, and if fortune smiles upon you, you'll be granted early access to the innovative Defy platform. Enter the raffle now and defy expectations!</p>
 
-                    <div className="flex items-center justify-between mt-14">
+                    <div className="flex items-center justify-between mt-14 max-[600px]:hidden">
                         <p className="text-left text-black text-base font-SatoshiBold">Activity Log</p>
                         <div className="px-3.5 py-2 bg-bgBlue rounded-full">
                             <p className="text-left text-white text-xs font-SatoshiMedium m-auto">Participating</p>
                         </div>
                     </div>
 
-                    <div className="rounded-xl w-full bg-greyVeryLight py-2.5 px-2 h-[180px] mt-4">
+                    <div className="rounded-xl w-full bg-greyVeryLight py-2.5 px-2 h-[180px] mt-4 max-[600px]:hidden">
                         <ActivityLogItem />
                     </div>
 
+
                 </div>
 
-                <div className="px-10 " style={{ flex: 2 }}>
+                <div className="px-10 max-[600px]:px-2" style={{ flex: 2 }}>
 
                     <div className="flex justify-between items-start pt-5">
                         <div>
@@ -110,7 +111,7 @@ export default function Raffle() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-[320px] rounded-[20px] flex flex-col items-center justify-center mt-8"
+                    <div className="w-full h-[320px] max-[600px]:h-[200px] rounded-[20px] flex flex-col items-center justify-center mt-8"
                         style={{
                             backgroundImage: `url(${raffleBg})`,
                             backgroundPosition: 'center',
@@ -136,6 +137,22 @@ export default function Raffle() {
                         </div>
                     </div>
 
+
+                    <div className="">
+
+                    <div className="flex items-center justify-between mt-14">
+                        <p className="text-left text-black text-base font-SatoshiBold">Activity Log</p>
+                        <div className="px-3.5 py-2 bg-bgBlue rounded-full">
+                            <p className="text-left text-white text-xs font-SatoshiMedium m-auto">Participating</p>
+                        </div>
+                    </div>
+
+                    <div className="rounded-xl w-full bg-greyVeryLight py-2.5 px-2 h-[180px] mt-4">
+                        <ActivityLogItem />
+                    </div>
+
+                    </div>
+
                     <div className="flex items-center justify-between mt-8">
                         <div className="flex-1 py-3 stroke-borderGrey border rounded-lg cursor-pointer mx-2">
                             <p className="text-center text-textGreyDark text-base font-SatoshiBold m-auto">Buy Tickets</p>
@@ -147,8 +164,8 @@ export default function Raffle() {
 
                 </div>
 
-                <div style={{ flex: 1 }}>
-                    <p className="font-SatoshiBold text-xl text-black text-left">Winners</p>
+                <div className="max-[600px]:w-full" style={{ flex: 1 }}>
+                    <p className="font-SatoshiBold text-xl text-black text-left ">Winners</p>
                     <div className="w-full rounded-xl bg-greyVeryLight py-4 px-5 mt-4 h-[500px]">
                         <div style={{ backgroundColor: "#E1E4EA" }} className="rounded-full w-full p-1.5 flex justify-between items-center">
                             <div

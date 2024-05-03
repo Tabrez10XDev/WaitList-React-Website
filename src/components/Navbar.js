@@ -5,111 +5,69 @@ import blueTicket from "../assets/blue_ticket.svg";
 
 import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import { useState } from "react";
+import menu from "../assets/menu.svg"
+import { Link } from "react-router-dom";
+import "../App.css"
 export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+
+
+  const [showNavbar, setShowNavbar] = useState(false)
+
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar)
+  }
+
 
   return (
-    <div className="w-9/12 mx-auto mt-8 mb-10 flex justify-between items-center">
-      <ul className="flex align-center md:justify-between">
-        <img alt="" src={defy} className="" />
-        <li>
-          <a className="p-4 font-SatoshiBold text-2xl">Defy</a>
-        </li>
-      </ul>
-      <nav>
-        <section className="MOBILE-MENU flex lg:hidden md:hidden">
-          <div
-            className="HAMBURGER-ICON space-y-2 "
-            onClick={() => setIsNavOpen((prev) => !prev)}
-          >
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-          </div>
-
-          <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
-            <div
-              className="absolute top-0 right-0 px-8 py-8"
-              onClick={() => setIsNavOpen(false)}
-            >
-              <svg
-                className="h-8 w-8 text-gray-600"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </div>
-            <ul className="flex flex-col items-center justify-between ">
-              <li>
-                <a className="font-SatoshiMedium text-xl mb-4">Quest</a>
-              </li>
-              <li>
-                <a className="font-SatoshiMedium text-xl mb-4">Raffle</a>
-              </li>
-              <li>
-                <a className="font-SatoshiMedium text-xl">Leaderboard</a>
-              </li>
-              <div className="bg-divider h-2/3 mb-4" style={{ width: 2 }}></div>
-              <div
-                onClick={handleOpenCoin}
-                className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointe mr-5"
-              >
-                <img alt="" className="h-5 w-5 mr-1.5" src={yellowDiamond} />
-                <p className="font-SatoshiMedium text-sm text-textGreyDark">
-                  90 Coins
-                </p>
-              </div>
-              <div
-                onClick={handleOpenTicket}
-                className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointer mr-5"
-              >
-                <img alt="" className="h-5 w-5 mr-1.5" src={blueTicket} />
-                <p className="font-SatoshiMedium text-sm text-textGreyDark">
-                  3 Tickets
-                </p>
-              </div>
-              <WalletSelector />
-            </ul>
-          </div>
-        </section>
-
-        <ul className="flex items-center justify-center  lg:flex sm:hidden ">
+    <nav className="w-9/12 mx-auto mt-8 mb-10 max-[600px]:w-11/12">
+      <ul className="flex justify-between align-center">
+        <ul className="flex align-center">
+          <img alt="" src={defy} />
           <li>
-            <a className="font-SatoshiMedium text-xl mr-6">Quest</a>
+            <a className="p-4 font-SatoshiBold text-2xl">Defy</a>
+          </li>
+        </ul>
+        <div className="menu-icon" onClick={handleShowNavbar}>
+          <img src={menu} style={{ width: 30, height: 30, objectFit: 'contain' }} />
+        </div>
+        <ul className={`flex items-center justify-center nav-elements ${showNavbar && 'active'}`}>
+          <li>
+          <Link to={{pathname: '/'}} className="font-SatoshiMedium text-xl mr-6">Quest</Link>
           </li>
           <li>
-            <a className="font-SatoshiMedium text-xl mr-6">Raffle</a>
+            <Link to={{pathname: '/raffle'}} className="font-SatoshiMedium text-xl mr-6">Raffle</Link>
           </li>
           <li>
             <a className="font-SatoshiMedium text-xl mr-6">Leaderboard</a>
           </li>
-          <div className="bg-divider h-2/3 " style={{ width: 2 }}></div>
-          <div
-            onClick={handleOpenCoin}
-            className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointe mr-5"
-          >
-            <img alt="" className="h-5 w-5 mr-1.5" src={yellowDiamond} />
-            <p className="font-SatoshiMedium text-sm text-textGreyDark">
-              90 Coins
-            </p>
-          </div>
-          <div
-            onClick={handleOpenTicket}
-            className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointer mr-5"
-          >
-            <img alt="" className="h-5 w-5 mr-1.5" src={blueTicket} />
-            <p className="font-SatoshiMedium text-sm text-textGreyDark">
-              3 Tickets
-            </p>
-          </div>
+          <div className="bg-divider h-2/3 mr-6" style={{ width: 2, display: showNavbar ? "none" : "flex" }}></div>
+          <li>
+            <div
+              onClick={handleOpenCoin}
+              className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointe mr-5"
+            >
+              <img alt="" className="h-5 w-5 mr-1.5" src={yellowDiamond} />
+              <p className="font-SatoshiMedium text-sm text-textGreyDark">
+                90 Coins
+              </p>
+            </div>
+          </li>
+          <li>
+            <div
+              onClick={handleOpenTicket}
+              className="p-2 rounded-full bg-greyVeryLight flex max-h-10 cursor-pointer mr-5"
+            >
+              <img alt="" className="h-5 w-5 mr-1.5" src={blueTicket} />
+              <p className="font-SatoshiMedium text-sm text-textGreyDark">
+                3 Tickets
+              </p>
+            </div>
+          </li>
           {/* <div className="px-6 py-2.5 rounded-full bg-black flex align-center justify-center cursor-pointer"> */}
-          <WalletSelector />
+          <li>
+            <WalletSelector />
+          </li>
           {/* </div> */}
         </ul>
       </nav>

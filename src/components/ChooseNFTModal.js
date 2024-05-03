@@ -11,7 +11,6 @@ import NFTBetModal from "./NFTBetModal";
 import axios from "axios";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
-import { useMediaQuery } from "react-responsive";
 
 const aptosConfig = new AptosConfig({
   network: Network.MAINNET,
@@ -22,8 +21,6 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
   const [isGrid, setIsGrid] = useState(true);
   const [nfts, setNfts] = useState([]);
   const [nftsV2, setNftsV2] = useState([]);
-
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
 
   const getNfts = async () => {
     try {
@@ -45,6 +42,18 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
   useEffect(() => {
     if (open) getNfts();
   }, [open]);
+  const fetchNfts = async () => {
+    const moduleAddress = process.env.REACT_APP_MODULE_ADDR;
+    const nfts = await fetchNftV1(moduleAddress);
+    console.log(nfts, "asdasd");
+    setNfts(nfts);
+    const nftsV2 = await fetchNftV2(moduleAddress);
+    setNftsV2(nftsV2);
+  };
+
+  useEffect(() => {
+    if (open) fetchNfts();
+  }, [open]);
 
   return (
     <Modal
@@ -54,8 +63,8 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
         position: "absolute",
         backgroundColor: "#FFF",
         // boxShadow: "2px solid black",
-        height: isSmallScreen ? "60%" : 500,
-        width: isSmallScreen ? "90%" : 800,
+        height: "80vh",
+        width: "80vw",
         margin: "auto",
         outlineWidth: 0,
         outline: "none",
@@ -65,18 +74,18 @@ export default function ChooseNFTModal({ open, handleClose, handleOpenNFT }) {
       className="NFTModal"
     >
       <div className="w-full h-full bg-white px-5 py-6 rounded-lg flex flex-col NFTModal">
-        <div className="flex items-center justify-between sm:flex-col">
+        <div className="flex items-center justify-between">
           <div style={{ flex: 3 }}>
-            <p className="font-SatoshiBold text-base text-black text-left sm:w-full sm:text-center">
+            <p className="font-SatoshiBold text-base text-black text-left">
               Choose NFT to Raffle
             </p>
-            <p className="font-SatoshiMedium text-sm text-textGreyDark text-left sm:w-full sm:text-center">
+            <p className="font-SatoshiMedium text-sm text-textGreyDark text-left">
               Select NFT to Raffle and win other exciting Prizes
             </p>
           </div>
           <div
             style={{ flex: 2 }}
-            className="flex items-center justify-between sm:mt-2"
+            className="flex items-center justify-between"
           >
             <div className="relative">
               <input

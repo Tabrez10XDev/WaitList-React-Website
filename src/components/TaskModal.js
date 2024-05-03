@@ -6,7 +6,8 @@ import profilePic from "../assets/profilePic.png";
 import coinAnim from "../assets/coinAnim.gif";
 import groupProfile from "../assets/groupProfile.svg";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { useMediaQuery } from "react-responsive";
+import axios from "axios";
+import CONST from "../Constants";
 
 export default function TaskModal({ open, handleClose, state }) {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
@@ -24,6 +25,39 @@ export default function TaskModal({ open, handleClose, state }) {
     signMessage,
   } = useWallet();
 
+  function connectDiscord() {
+    axios
+      .get(
+        `${CONST.baseUrl}/auth/discord?walletId=${account?.address}&taskId=${state.task["_id"]}`
+      )
+      .then((response) => {})
+      .catch((err) => {});
+  }
+
+  function connectTwitter() {
+    axios
+      .get(
+        `${CONST.baseUrl}/auth/twitter?walletId=${account?.address}&taskId=${state.task["_id"]}`
+      )
+      .then((response) => {})
+      .catch((err) => {});
+  }
+
+  function connectGoogle() {
+    axios
+      .get(
+        `${CONST.baseUrl}/auth/google?walletId=${account?.address}&taskId=${state.task["_id"]}`
+      )
+      .then((response) => {})
+      .catch((err) => {});
+  }
+
+  function handleClick() {
+    if (state.task.type == "discordJoinServer") {
+      connectDiscord();
+    }
+  }
+
   return (
     <Modal
       onClose={handleClose}
@@ -31,13 +65,11 @@ export default function TaskModal({ open, handleClose, state }) {
       style={{
         position: "absolute",
         backgroundColor: "#FFF",
-        // boxShadow: "2px solid black",
-        height: isSmallScreen ? "60%" : 500,
-        width: isSmallScreen ? "90%" : 800,
         margin: "auto",
         color: "white",
         className: "NFTModal",
       }}
+      className="h-[500px] w-[800px] max-[600px]:w-[95%]"
     >
       <div className="w-full h-full bg-white p-5 rounded-lg NFTModal">
         <div className="flex items-center justify-between">
@@ -99,7 +131,10 @@ export default function TaskModal({ open, handleClose, state }) {
               </p>
             </div>
 
-            <div className="px-6  py-2.5 rounded-lg bg-bgBlue flex items-center justify-center mt-3">
+            <div
+              onClick={handleClick}
+              className="px-6  py-2.5 rounded-lg bg-bgBlue flex items-center justify-center mt-3 cursor-pointer"
+            >
               <p className="font-SatoshiMedium text-base text-white">
                 Connect X
               </p>

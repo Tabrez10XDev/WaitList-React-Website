@@ -24,8 +24,9 @@ export default function ReferralModal({ open, handleClose }) {
         color: "white",
         className: "NFTModal",
       }}
+      className="h-[500px] w-[800px] max-[600px]:w-[95%]"
     >
-      <div className="w-full h-full bg-white p-5 rounded-lg NFTModal sm:p-3">
+      <div className="w-full h-full bg-white p-5 rounded-lg NFTModal sm:p-3overflow-y-scroll">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <img alt="" className="h-8 w-8 object-contain" src={referralIcon} />
@@ -45,7 +46,7 @@ export default function ReferralModal({ open, handleClose }) {
           </div>
         </div>
 
-        <div className="flex p-2">
+        <div className="flex p-2 max-[600px]:flex-col">
           <div style={{ flex: 2 }} className="p-4">
             <img
               alt=""
@@ -106,8 +107,6 @@ export default function ReferralModal({ open, handleClose }) {
               </p>
               <div className="items-center mt-6 flex sm:overflow-auto">
                 <img alt="" className="size-6" src={xLogo} />
-                <img alt="" className="size-6 ml-3" src={xLogo} />
-                <img alt="" className="size-6 ml-3" src={xLogo} />
                 <img alt="" className="size-6 ml-3" src={xLogo} />
                 <img alt="" className="size-6 ml-3" src={xLogo} />
               </div>
