@@ -3,6 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: { sm: { max: "768px" } },
+      display: ["responsive"],
       colors: {
         divider: "#B0B0B0",
         textGreyDark: "#646D80",
