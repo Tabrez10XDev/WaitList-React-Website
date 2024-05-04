@@ -11,6 +11,7 @@ import NFTBetModal from "./NFTBetModal";
 import axios from "axios";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import { fetchNftV1, fetchNftV2 } from "../utils/indexer";
 
 const aptosConfig = new AptosConfig({
   network: Network.MAINNET,

@@ -8,6 +8,7 @@ import groupProfile from "../assets/groupProfile.svg";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import axios from "axios";
 import CONST from "../Constants";
+import { useMediaQuery } from "react-responsive";
 
 export default function TaskModal({ open, handleClose, state }) {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });

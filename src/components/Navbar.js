@@ -1,4 +1,3 @@
-import { useState } from "react";
 import defy from "../assets/Defy_logo.svg";
 import yellowDiamond from "../assets/yellow_diamond.svg";
 import blueTicket from "../assets/blue_ticket.svg";
@@ -6,21 +5,18 @@ import blueTicket from "../assets/blue_ticket.svg";
 import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { useState } from "react";
-import menu from "../assets/menu.svg"
+import menu from "../assets/menu.svg";
 import { Link } from "react-router-dom";
-import "../App.css"
+import "../App.css";
 export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
-
-
-  const [showNavbar, setShowNavbar] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(false);
 
   const handleShowNavbar = () => {
-    setShowNavbar(!showNavbar)
-  }
-
+    setShowNavbar(!showNavbar);
+  };
 
   return (
-    <nav className="w-9/12 mx-auto mt-8 mb-10 max-[600px]:w-11/12">
+    <nav className="w-9/12 mx-auto pt-8 mb-10 max-[600px]:w-11/12">
       <ul className="flex justify-between align-center">
         <ul className="flex align-center">
           <img alt="" src={defy} />
@@ -29,19 +25,44 @@ export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
           </li>
         </ul>
         <div className="menu-icon" onClick={handleShowNavbar}>
-          <img src={menu} style={{ width: 30, height: 30, objectFit: 'contain' }} />
+          <img
+            src={menu}
+            style={{ width: 30, height: 30, objectFit: "contain" }}
+          />
         </div>
-        <ul className={`flex items-center justify-center nav-elements ${showNavbar && 'active'}`}>
+        <ul
+          className={`flex items-center justify-center nav-elements ${
+            showNavbar && "active"
+          }`}
+        >
           <li>
-          <Link to={{pathname: '/'}} className="font-SatoshiMedium text-xl mr-6">Quest</Link>
+            <Link
+              to={{ pathname: "/" }}
+              className="font-SatoshiMedium text-xl mr-6"
+            >
+              Quest
+            </Link>
           </li>
           <li>
-            <Link to={{pathname: '/raffle'}} className="font-SatoshiMedium text-xl mr-6">Raffle</Link>
+            <Link
+              to={{ pathname: "/raffle" }}
+              className="font-SatoshiMedium text-xl mr-6"
+            >
+              Raffle
+            </Link>
           </li>
           <li>
-            <a className="font-SatoshiMedium text-xl mr-6">Leaderboard</a>
+            <Link
+              to={{ pathname: "/leaderboard" }}
+              className="font-SatoshiMedium text-xl mr-6"
+            >
+              Leaderboard
+            </Link>
           </li>
-          <div className="bg-divider h-2/3 mr-6" style={{ width: 2, display: showNavbar ? "none" : "flex" }}></div>
+          <div
+            className="bg-divider h-2/3 mr-6"
+            style={{ width: 2, display: showNavbar ? "none" : "flex" }}
+          ></div>
           <li>
             <div
               onClick={handleOpenCoin}
@@ -70,28 +91,7 @@ export default function Navbar({ handleOpenTicket, handleOpenCoin }) {
           </li>
           {/* </div> */}
         </ul>
-      </nav>
-      <style>
-        {`
-      .hideMenuNav {
-        display: none;
-      }
-      .showMenuNav {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 40vh;
-        top: 0;
-        left: 0;
-        background: white;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    `}
-      </style>
-    </div>
+      </ul>
+    </nav>
   );
 }
